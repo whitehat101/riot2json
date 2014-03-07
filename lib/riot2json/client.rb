@@ -13,13 +13,13 @@ module Riot2JSON
       @version = version
       LolClient.instance = self
 
-      if isDeamon 
-		Process.daemon()
-	  end
-	  
+      if isDeamon
+        Process.daemon()
+      end
+
       token = Auth.request_token(region, user, pass)
       @redis = Redis.new(:path => '/tmp/redis.sock')
-	  
+
       begin
         EventMachine.run do
           @connection = EventMachine::RTMP.ssl_connect("prod.#{region}.lol.riotgames.com", 2099)
@@ -49,13 +49,13 @@ module Riot2JSON
         end
       rescue => e
         log = "/var/log/penguins/rtmp/crash-#{Time.now.strftime("%m-%d-%Y %H:%M:%S")}"
-		if not isDaemon
-			puts "An unexpected error has been reached, dumping formation to log: #{log}"
-			puts "Restarting node now..."
-			puts e.backtrace
-			puts e.inspect
-		end
-		
+        unless isDaemon
+          puts "An unexpected error has been reached, dumping formation to log: #{log}"
+          puts "Restarting node now..."
+          puts e.backtrace
+          puts e.inspect
+        end
+
         f = open(log, "w")
         f.write(e.backtrace)
         f.write("\n#{e.inspect}")
@@ -324,7 +324,7 @@ module Riot2JSON
       req = invoke("login", "loginService", ac)
       req.send
 
-      req.callback do |res| 
+      req.callback do |res|
         @account = res.message.values[1].body[:accountSummary][:accountId]
         @token = res.message.values[1].body[:accountSummary][:token]
         auth("%s:%s" % [res.message.values[1].body[:accountSummary][:username], res.message.values[1].body[:token]])

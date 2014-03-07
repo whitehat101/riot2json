@@ -32,11 +32,11 @@ module Riot2JSON
         request_token(region, user, password)
         return
       end
-      
+
       return resp["reason"].to_sym if resp["reason"] != "login_rate"
       return token if token
 
-      puts "Currently ing login queue, please hold!"
+      puts "Currently in login queue, please hold!"
 
       node = resp["node"]
       champ = resp["champ"]

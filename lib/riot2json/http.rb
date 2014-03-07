@@ -39,6 +39,5 @@ module Riot2JSON
       LolClient.instance.getStatus(self)
     end
 
-
   end
 end
