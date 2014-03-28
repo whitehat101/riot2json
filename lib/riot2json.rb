@@ -21,11 +21,6 @@ require_relative "riot2json/http"
 
 module Riot2JSON
   OpenSSL::SSL::VERIFY_PEER = OpenSSL::SSL::VERIFY_NONE
-  user = ARGV[0]
-  pass = ARGV[1]
-  region = ARGV[2]
-  port = ARGV[3]
-  version = ARGV[4]
-  isDaemon = ARGV[5]
+  user, pass, region, port, version, isDaemon = ARGV
   LolClient.new.start user, pass, region, port, version, isDaemon
 end

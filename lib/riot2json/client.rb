@@ -13,7 +13,7 @@ module Riot2JSON
       @version = version
       LolClient.instance = self
 
-      if isDeamon
+      if isDaemon
         Process.daemon()
       end
 

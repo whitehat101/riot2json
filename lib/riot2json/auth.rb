@@ -38,9 +38,9 @@ module Riot2JSON
 
       puts "Currently in login queue, please hold!"
 
-      node = resp["node"]
+      node  = resp["node"]
       champ = resp["champ"]
-      rate = resp["rate"]
+      rate  = resp["rate"]
       delay = resp["delay"]
 
       id = -1
